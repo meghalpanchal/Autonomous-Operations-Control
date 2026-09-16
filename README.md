@@ -77,35 +77,3 @@ React Application
        ├── Telemetry Charts
        ├── Search & Filtering
        └── Operational Alerts
-
-
-
-
-## Frontend Structure
-
-```text
-src/
-├── components/
-│   ├── AlertsPanel.tsx
-│   ├── FleetSummary.tsx
-│   ├── MachineFilters.tsx
-│   ├── MachineSelector.tsx
-│   └── TelemetryCharts.tsx
-│
-├── hooks/
-│   └── useMachineWebSocket.ts
-│
-├── types/
-│   └── machine.ts
-│
-├── utils/
-│   └── machineHealth.ts
-│
-├── App.tsx
-└── main.tsx
-
-
-
-
-
-
