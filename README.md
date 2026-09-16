@@ -77,6 +77,10 @@ React Application
        ├── Telemetry Charts
        ├── Search & Filtering
        └── Operational Alerts
+
+
+
+
 ##Frontend Structure
 src/
 ├── components/
