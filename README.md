@@ -82,6 +82,8 @@ React Application
 
 
 ## Frontend Structure
+
+```text
 src/
 ├── components/
 │   ├── AlertsPanel.tsx
