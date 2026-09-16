@@ -8,11 +8,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-type TelemetryPoint = {
-  timestamp: string;
-  speed: number;
-  temperature: number;
-};
+import type { TelemetryPoint } from "../types/machine";
 
 type TelemetryChartsProps = {
   data: TelemetryPoint[];
@@ -28,33 +24,50 @@ function TelemetryCharts({ data }: TelemetryChartsProps) {
     }),
   }));
 
+  const latestPoint = chartData.at(-1);
+
   return (
-    <section className="telemetry-section">
-      <div className="chart-card">
-        <div className="chart-header">
+    <section className="mb-6 grid grid-cols-1 gap-5 lg:grid-cols-2">
+      {/* Speed */}
+      <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="mb-5 flex items-start justify-between gap-4">
           <div>
-            <h3>Speed</h3>
-            <span>Last 30 seconds</span>
+            <h3 className="text-lg font-semibold text-slate-900">
+              Speed
+            </h3>
+
+            <span className="mt-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+              Last 30 seconds
+            </span>
           </div>
 
-          <strong>
-            {chartData.length > 0
-              ? `${chartData[chartData.length - 1].speed} km/h`
-              : "--"}
+          <strong className="text-xl font-bold text-blue-600">
+            {latestPoint ? `${latestPoint.speed} km/h` : "--"}
           </strong>
         </div>
 
-        <div className="chart-container">
+        <div className="h-56 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="#e2e8f0"
+              />
+
               <XAxis
                 dataKey="time"
                 tick={{ fontSize: 11 }}
                 minTickGap={25}
+                stroke="#94a3b8"
               />
-              <YAxis />
+
+              <YAxis
+                stroke="#94a3b8"
+                tick={{ fontSize: 11 }}
+              />
+
               <Tooltip />
+
               <Line
                 type="monotone"
                 dataKey="speed"
@@ -68,31 +81,48 @@ function TelemetryCharts({ data }: TelemetryChartsProps) {
         </div>
       </div>
 
-      <div className="chart-card">
-        <div className="chart-header">
+      {/* Temperature */}
+      <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="mb-5 flex items-start justify-between gap-4">
           <div>
-            <h3>Temperature</h3>
-            <span>Last 30 seconds</span>
+            <h3 className="text-lg font-semibold text-slate-900">
+              Temperature
+            </h3>
+
+            <span className="mt-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+              Last 30 seconds
+            </span>
           </div>
 
-          <strong>
-            {chartData.length > 0
-              ? `${chartData[chartData.length - 1].temperature} °C`
+          <strong className="text-xl font-bold text-red-600">
+            {latestPoint
+              ? `${latestPoint.temperature} °C`
               : "--"}
           </strong>
         </div>
 
-        <div className="chart-container">
+        <div className="h-56 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="#e2e8f0"
+              />
+
               <XAxis
                 dataKey="time"
                 tick={{ fontSize: 11 }}
                 minTickGap={25}
+                stroke="#94a3b8"
               />
-              <YAxis />
+
+              <YAxis
+                stroke="#94a3b8"
+                tick={{ fontSize: 11 }}
+              />
+
               <Tooltip />
+
               <Line
                 type="monotone"
                 dataKey="temperature"
